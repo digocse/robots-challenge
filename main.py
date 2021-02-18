@@ -1,4 +1,5 @@
 from models import Grid
+from custom_exceptions import CustomExceptions
 
 def main():
 	print('*** Welcome to the Mars Robots Guide! ***\n\n')
@@ -9,9 +10,15 @@ def main():
 
 	grid_size = grid_size.split(' ')
 
+	max_x_axis = int(grid_size[0])
+	max_y_axis = int(grid_size[1])
+
+	if max_x_axis > 50 or max_y_axis > 50:
+		raise CustomExceptions.InvalidGridRangeError(max_x_axis, max_y_axis)
+
 	grid = Grid(
-		x=int(grid_size[0]),
-		y=int(grid_size[1]),
+		x=max_x_axis,
+		y=max_y_axis,
 	)
 
 	while True:
