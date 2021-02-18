@@ -1,3 +1,5 @@
+from utils import StringUtils
+
 class Grid:
 	def __init__(self, x: int, y:int):
 		self.max_x = x
@@ -33,13 +35,8 @@ class Grid:
 		if not self.robots:
 			return
 
-		instructions.replace(" ", "")
-
-		if len(instructions) >= 100:
-			print('These instructions exceed the maximum of 99 characters')
-			return
-
-		# TODO: uppercase instructions string
+		instructions = StringUtils.normalize(instructions)
+		StringUtils.validate(instructions, 100)
 
 		robot = self.robots[-1]
 
