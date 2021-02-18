@@ -6,6 +6,7 @@ class Grid:
 		self.max_x = x
 		self.max_y = y
 		self.robots = []
+		self.legacyScent = []
 
 	def generate_robot(self, x: int, y: int, orientation: str):
 		if (x > 50 or y > 50):
@@ -51,31 +52,46 @@ class Grid:
 			if instruction == 'F':
 				robot_position = robot.pos()
 
-				if self.check_collisions(robot_position):
+				if not self.is_safe_position(robot_position):
+					continue
+
+				final_x, final_y = self.calculate_next_positions(robot_position)
+
+				if self.check_collisions(final_x, final_y):
 					# TODO: create exception
-					print('The robot has crashed with another one')
-					return
+					print('ALERT: Robot would have crashed with another. Instruction skipped!')
+					continue
+
+				if self.is_outside_grid(final_x, final_y):
+					self.legacyScent.append(robot_position)
+					print(str(robot_position) + ' LOST')
+					robot.move()
+					break
+
 				robot.move()
 			else:
 				robot.rotate(instruction)
 		print(robot.pos())
 
-	def check_collisions(self, robot_position: tuple):
+
+	def check_collisions(self, final_x: int, final_y: int):
+		return (final_x, final_y) in self.last_positions()
+
+	def is_safe_position(self, position):
+		return False if position in self.legacyScent else True
+
+	def calculate_next_positions(self, robot_position: tuple):
 		robot_direction = robot_position[2]
 		direction = Robot.COMPASS.index(robot_direction)
 
+		# Even indexes represent y-axis and odd indexes x-axis direction changes
 		if direction % 2 == 0:
 			final_x = robot_position[0]
 			final_y = robot_position[1] + Robot.DIRECTION[direction]
 		else:
 			final_x = robot_position[0] + Robot.DIRECTION[direction]
 			final_y = robot_position[1]
-
-		return (
-			self.is_outside_grid(final_x, final_y) 
-			or (final_x, final_y) in self.last_positions()
-			# TODO: check if there's a scent about this position
-		)
+		return final_x, final_y
 
 
 class Robot:
