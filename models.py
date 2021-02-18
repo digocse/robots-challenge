@@ -26,6 +26,8 @@ class Robot:
 	COMPASS = ['N', 'E', 'S', 'W']
 	DIRECTION = [1, 1, -1, -1]
 
+	# TODO: create unknown direction exception
+
 	def __init__(self, x=0, y=0, orientation='N'):
 		self.x = x
 		self.y = y
@@ -48,3 +50,11 @@ class Robot:
 			rotation = len(Robot.COMPASS) - 1
 
 		self.orientation = rotation
+
+	def move(self):
+		if not (self.orientation % 2):
+			self.y += Robot.DIRECTION[self.orientation]
+		else:
+			self.x += Robot.DIRECTION[self.orientation]
+
+		return self.pos()
