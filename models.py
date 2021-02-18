@@ -33,3 +33,18 @@ class Robot:
 
 	def pos(self):
 		return (self.x, self.y, Robot.COMPASS[self.orientation])
+
+	def rotate(self, direction: str):
+		if direction not in ['L', 'R']:
+			print('Unknown direction')
+
+		delta = 1 if direction == 'R' else -1
+
+		rotation =  self.orientation + delta
+
+		if (rotation >= len(Robot.COMPASS)):
+			 rotation = 0
+		elif (rotation < 0):
+			rotation = len(Robot.COMPASS) - 1
+
+		self.orientation = rotation
