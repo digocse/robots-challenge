@@ -1,5 +1,5 @@
 from utils import StringUtils
-from custom_exceptions import CustomExceptions
+from exceptions import CustomExceptions
 
 class Grid:
 	def __init__(self, x: int, y:int):

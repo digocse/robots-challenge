@@ -1,5 +1,5 @@
 from models import Grid
-from custom_exceptions import CustomExceptions
+from exceptions import CustomExceptions
 
 def main():
 	print('*** Welcome to the Mars Robots Guide! ***\n\n')
