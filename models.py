@@ -7,13 +7,20 @@ class Grid:
 	def generate_robot(self, x: int, y: int, orientation: str):
 
 		if (x,y) in self.last_positions():
+			# TODO: create exception
 			print('The robot has crashed with another one')
+			return
 
-		# if self.
+		if self.is_outside_grid(x, y):
+			# TODO: create exception
+			print('Robot cannot be created outside the grid')
+			return
+
+		robot = Robot(x, y, orientation)
+		self.robots.append(robot)
 
 	def is_outside_grid(self, x: int, y:int):
 		return x < 0 or y < 0 or x > self.max_x or y > self.max_y
-
 
 	def last_positions(self):
 		return [

@@ -2,6 +2,10 @@ from models import Grid
 
 def main():
 	print('*** Welcome to the Mars Robots Guide! ***\n\n')
+
+	# Robot(x=0, y=0, orientation='E').rotate('R')
+	# return
+
 	grid_size = input('Enter the upper right corner coordinates: (e.g. 5 3)\n')
 
 	if not grid_size:
