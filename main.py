@@ -28,6 +28,14 @@ def main():
 		robot_instruction = input('Robot instruction: (e.g RFRFRFRF)\n')
 		print(robot_instruction)
 
+		robot_initial_pos = robot_initial_pos.split(' ')
+		grid.generate_robot(
+			x=int(robot_initial_pos[0]),
+			y=int(robot_initial_pos[1]),
+			orientation=robot_initial_pos[2],
+		)
+		grid.robot_movement(robot_instruction)
+
 
 if __name__ == '__main__':
 	main()

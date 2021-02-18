@@ -6,9 +6,10 @@ class Grid:
 
 	def generate_robot(self, x: int, y: int, orientation: str):
 
+		# TODO: create restriction for maximum coordinate of 50
 		if (x,y) in self.last_positions():
 			# TODO: create exception
-			print('The robot has crashed with another one')
+			print('The robot has been launched on top of another... BOOM!')
 			return
 
 		if self.is_outside_grid(x, y):
@@ -27,6 +28,50 @@ class Grid:
 			robot.pos()[:-1]
 			for robot in self.robots
 		]
+
+	def robot_movement(self, instructions: str):
+		if not self.robots:
+			return
+
+		# TODO: restrict instructions to be less than 100 characters
+		# TODO: uppercase instructions string
+
+		robot = self.robots[-1]
+
+		for instruction in instructions:
+			if instruction not in ['L', 'R', 'F']:
+				# TODO: create exception
+				print('Unknown instruction has been sent')
+				return
+
+			if instruction == 'F':
+				robot_position = robot.pos()
+
+				if self.check_collisions(robot_position):
+					# TODO: create exception
+					print('The robot has crashed with another one')
+					return
+				robot.move()
+			else:
+				robot.rotate(instruction)
+		print(robot.pos())
+
+	def check_collisions(self, robot_position: tuple):
+		robot_direction = robot_position[2]
+		direction = Robot.COMPASS.index(robot_direction)
+
+		if direction % 2 == 0:
+			final_x = robot_position[0]
+			final_y = robot_position[1] + Robot.DIRECTION[direction]
+		else:
+			final_x = robot_position[0] + Robot.DIRECTION[direction]
+			final_y = robot_position[1]
+
+		return (
+			self.is_outside_grid(final_x, final_y) 
+			or (final_x, final_y) in self.last_positions()
+			# TODO: check if there's a scent about this position
+		)
 
 
 class Robot:
