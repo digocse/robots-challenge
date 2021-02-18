@@ -1,4 +1,5 @@
 from utils import StringUtils
+from custom_exceptions import CustomExceptions
 
 class Grid:
 	def __init__(self, x: int, y:int):
@@ -7,8 +8,9 @@ class Grid:
 		self.robots = []
 
 	def generate_robot(self, x: int, y: int, orientation: str):
+		if (x > 50 or y > 50):
+			raise CustomExceptions.InvalidGridCoordinateError(x, y)
 
-		# TODO: create restriction for maximum coordinate of 50
 		if (x,y) in self.last_positions():
 			# TODO: create exception
 			print('The robot has been launched on top of another... BOOM!')
