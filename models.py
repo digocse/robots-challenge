@@ -13,14 +13,12 @@ class Grid:
 			raise CustomExceptions.InvalidGridCoordinateError(x, y)
 
 		if (x,y) in self.last_positions():
-			# TODO: create exception
 			print('The robot has been launched on top of another... BOOM!')
-			return
+			raise CustomExceptions.LaunchRobotCrashError(x, y, orientation)
 
 		if self.is_outside_grid(x, y):
-			# TODO: create exception
 			print('Robot cannot be created outside the grid')
-			return
+			raise CustomExceptions.CoordinateDoesntExistError(x, y, orientation)
 
 		robot = Robot(x, y, orientation)
 		self.robots.append(robot)
@@ -58,7 +56,7 @@ class Grid:
 				final_x, final_y = self.calculate_next_positions(robot_position)
 
 				if self.check_collisions(final_x, final_y):
-					# TODO: create exception
+					# This approach skips the dangerous instruction. This intentionally changes the route
 					print('ALERT: Robot would have crashed with another. Instruction skipped!')
 					continue
 
