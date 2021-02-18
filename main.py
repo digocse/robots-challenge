@@ -14,19 +14,13 @@ def main():
 		y=int(grid_size[1]),
 	)
 
-	print(grid.max_x)
-	print(grid.max_y)
-
 	while True:
 		robot_initial_pos = input('Next robot position: (e.g. 1 1 E)\n')
 
 		if not robot_initial_pos:
 			break
 
-		print(robot_initial_pos)
-
 		robot_instruction = input('Robot instruction: (e.g RFRFRFRF)\n')
-		print(robot_instruction)
 
 		robot_initial_pos = robot_initial_pos.split(' ')
 		grid.generate_robot(
