@@ -33,7 +33,12 @@ class Grid:
 		if not self.robots:
 			return
 
-		# TODO: restrict instructions to be less than 100 characters
+		instructions.replace(" ", "")
+
+		if len(instructions) >= 100:
+			print('These instructions exceed the maximum of 99 characters')
+			return
+
 		# TODO: uppercase instructions string
 
 		robot = self.robots[-1]
