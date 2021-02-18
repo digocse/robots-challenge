@@ -1,6 +1,8 @@
 # python
 *.pyc
 
+.DS_Store
+
 # pytest
 .pytest_cache/
 __pycache__/
