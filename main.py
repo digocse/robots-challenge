@@ -28,7 +28,7 @@ def main():
 			y=int(robot_initial_pos[1]),
 			orientation=robot_initial_pos[2],
 		)
-		grid.robot_movement(robot_instruction)
+		grid.apply_robot_instructions(robot_instruction)
 
 
 if __name__ == '__main__':

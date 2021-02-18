@@ -31,7 +31,7 @@ class Grid:
 			for robot in self.robots
 		]
 
-	def robot_movement(self, instructions: str):
+	def apply_robot_instructions(self, instructions: str):
 		if not self.robots:
 			return
 
