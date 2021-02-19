@@ -1,7 +1,8 @@
 # robots-challenge
 
 ## About
-This application solves the problem of the exploring probes in mars, which supposes a rectangular grid with a range of exploring probes.
+This application has been created in order to explore Mars territory at its most by using robots!
+It is possible to feed the application with the size of the grid that you would like to explore, robots coordinates and instructions. Enjoy!
 
 ## Prerequisites
 Install Python 3 and pyenv.
