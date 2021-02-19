@@ -64,7 +64,7 @@ class Grid:
 					self.legacyScent.append(robot_position)
 					print(str(robot_position) + ' LOST')
 					robot.move()
-					break
+					return
 
 				robot.move()
 			else:

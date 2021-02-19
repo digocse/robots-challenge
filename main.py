@@ -2,8 +2,13 @@ from models import Grid
 from exceptions import CustomExceptions
 
 def main():
-	print('*** Welcome to the Mars Robots Guide! ***\n\n')
-	grid_size = input('Enter the upper right corner coordinates: (e.g. 5 3)\n')
+	print('*** Welcome to the Mars Robots Guide! ***\n')
+	print('Here are the computed outputs:\n')
+
+	with open('robots_guide.in.md') as f:
+		lines = f.readlines()
+
+	grid_size = lines[0]
 
 	if not grid_size:
 		return
@@ -21,13 +26,17 @@ def main():
 		y=max_y_axis,
 	)
 
-	while True:
-		robot_initial_pos = input('Next robot position: (e.g. 1 1 E)\n')
+	updated_lines = lines.pop(0)
+	robots_seed_positions = lines[::2]
+	robots_instructions = lines[1::2]
+
+	for position, instruction in zip(robots_seed_positions, robots_instructions):
+		robot_initial_pos = position.strip('\n')
 
 		if not robot_initial_pos:
 			break
 
-		robot_instruction = input('Robot instruction: (e.g RFRFRFRF)\n')
+		robot_instruction = instruction
 
 		robot_initial_pos = robot_initial_pos.split(' ')
 		grid.generate_robot(
@@ -36,7 +45,7 @@ def main():
 			orientation=robot_initial_pos[2],
 		)
 		grid.apply_robot_instructions(robot_instruction)
-
+	f.close()
 
 if __name__ == '__main__':
 	main()
