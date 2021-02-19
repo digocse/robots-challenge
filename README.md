@@ -30,8 +30,8 @@ source activate robots
 
 Install dependencies locally (required to run tests):
 
-    `pip install -r requirements.txt`
-    `py.test -s --verbose`
+    pip install -r requirements.txt
+    py.test -s --verbose
 
 
 ## Run the app
@@ -57,8 +57,8 @@ The remaining input consists of a sequence of robot positions and instructions (
 ## Testing
 Install the necessary dependencies and run the tests:
 
-    `pip install -r requirements.txt`
-    `py.test -s --verbose`
+    pip install -r requirements.txt
+    py.test -s --verbose
 
 
 ## Coverage
