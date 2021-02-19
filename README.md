@@ -28,11 +28,6 @@ Activate the virtualenv:
 source activate robots
 ```
 
-Install dependencies locally (required to run tests):
-
-    pip install -r requirements.txt
-    py.test -s --verbose
-
 
 ## Run the app
 ```bash
