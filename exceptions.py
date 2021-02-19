@@ -13,6 +13,8 @@ class CustomExceptions:
 	    """Exception raised when a robot has been launched on top of another"""
 	    pass
 
+
+	### Robot exceptions:
 	class CoordinateDoesntExistError(Exception):
 	    """Exception raised while creating robot on invalid coordinate"""
 	    pass

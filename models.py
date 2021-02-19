@@ -2,6 +2,7 @@ from utils import StringUtils
 from exceptions import CustomExceptions
 
 class Grid:
+	"""Class that controls the Grid, robots and their instructions"""
 	def __init__(self, x: int, y:int):
 		self.max_x = x
 		self.max_y = y
@@ -9,6 +10,10 @@ class Grid:
 		self.legacyScent = []
 
 	def generate_robot(self, x: int, y: int, orientation: str):
+		"""
+		Receives the coordinates and orientation to build a new robot on the Grid
+		Validates if the launch position is the same of a previous one.
+		"""
 		if (x > 50 or y > 50):
 			raise CustomExceptions.InvalidGridCoordinateError(x, y)
 
@@ -33,6 +38,15 @@ class Grid:
 		]
 
 	def apply_robot_instructions(self, instructions: str):
+		"""
+		Apply robot instructions to rotate and/or move forward on the specified direction
+		Check Grid edges and leave a "Robot's scent" of a dangerous position and direction
+
+		Notice:
+		1) Mars robots might be very expensive so instead of crashing them with another I've 
+		decided to also skip this instruction if its the case.
+		2) A Robot scent (x, y) position is not a prohibited coordinate if it is going on a different direction!
+		"""
 		if not self.robots:
 			return
 
@@ -58,6 +72,10 @@ class Grid:
 					print('ALERT: Robot would have crashed with another. Instruction skipped!')
 					continue
 
+				"""
+				if the next position is outside the grid but there was none legacyScent
+				the robot should leave one for posterity
+				"""
 				if self.is_outside_grid(final_x, final_y):
 					self.legacyScent.append(robot_position)
 					print(str(robot_position) + ' LOST')
@@ -91,6 +109,7 @@ class Grid:
 
 
 class Robot:
+	"""Class that models a Robot"""
 	COMPASS = ['N', 'E', 'S', 'W']
 	DIRECTION = [1, 1, -1, -1]
 

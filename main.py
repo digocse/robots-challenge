@@ -26,9 +26,9 @@ def main():
 		y=max_y_axis,
 	)
 
-	updated_lines = lines.pop(0)
-	robots_seed_positions = lines[::2]
-	robots_instructions = lines[1::2]
+	updated_lines = lines.pop(0) 		# upper-right coordinates of the rectangular world
+	robots_seed_positions = lines[::2]	# Robots initial position
+	robots_instructions = lines[1::2]	# Robots instructions
 
 	for position, instruction in zip(robots_seed_positions, robots_instructions):
 		robot_initial_pos = position.strip('\n')
