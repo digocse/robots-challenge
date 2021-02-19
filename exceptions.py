@@ -16,3 +16,7 @@ class CustomExceptions:
 	class CoordinateDoesntExistError(Exception):
 	    """Exception raised while creating robot on invalid coordinate"""
 	    pass
+
+	class UnknownInstructionError(Exception):
+	    """Exception raised while creating robot on invalid coordinate"""
+	    pass

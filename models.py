@@ -43,9 +43,7 @@ class Grid:
 
 		for instruction in instructions:
 			if instruction not in ['L', 'R', 'F']:
-				# TODO: create exception
-				print('Unknown instruction has been sent')
-				return
+				raise CustomExceptions.UnknownInstructionError(instruction)
 
 			if instruction == 'F':
 				robot_position = robot.pos()
@@ -96,8 +94,6 @@ class Robot:
 	COMPASS = ['N', 'E', 'S', 'W']
 	DIRECTION = [1, 1, -1, -1]
 
-	# TODO: create unknown direction exception
-
 	def __init__(self, x=0, y=0, orientation='N'):
 		self.x = x
 		self.y = y
@@ -108,7 +104,7 @@ class Robot:
 
 	def rotate(self, direction: str):
 		if direction not in ['L', 'R']:
-			print('Unknown direction')
+			raise CustomExceptions.UnknownInstructionError(direction)
 
 		delta = 1 if direction == 'R' else -1
 
